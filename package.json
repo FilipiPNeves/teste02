@@ -12,6 +12,6 @@
     "node": ">=16"
   },
   "dependencies": {
-    "baileys": "^6.7.0"
+    "@whiskeysockets/baileys": "^6.7.0"
   }
 }
