@@ -35,6 +35,11 @@ async function startBot() {
                 const userJid = msg.key.participant || msg.key.remoteJid;
                 if (!respondedUsers.has(userJid)) {
                     await sock.sendMessage(msg.key.remoteJid, { text: 'Olá, tudo bem? \nPara eu lhe informar valores, me diga:\n\n- Qual data de entrada?\n\n- Qual data de saída?\n\n- Quantas pessoas?' });
+                    // Marcar conversa como não lida após responder
+                    await sock.chatModify(
+                        { markRead: false, lastMessages: [msg] },
+                        msg.key.remoteJid
+                    );
                     respondedUsers.add(userJid);
                 }
             }
