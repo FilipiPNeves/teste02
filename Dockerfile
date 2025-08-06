@@ -1,5 +1,5 @@
-# Use imagem oficial Node.js LTS (16 ou superior, conforme package.json)
-FROM node:18-alpine
+# Use imagem oficial Node.js 20 (compatível com baileys@6.7.18)
+FROM node:20-alpine
 
 # Diretório de trabalho
 WORKDIR /app
