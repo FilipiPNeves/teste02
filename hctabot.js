@@ -34,7 +34,7 @@ async function startBot() {
                 // Para grupos, use participant; para privado, use remoteJid
                 const userJid = msg.key.participant || msg.key.remoteJid;
                 if (!respondedUsers.has(userJid)) {
-                    await sock.sendMessage(msg.key.remoteJid, { text: 'Olá, tudo bem? \n\nPara eu lhe informar valores, me diga:\n\n- Qual data de entrada?\n\n- Qual data de saída?\n\n- Quantas pessoas?' });
+                    await sock.sendMessage(msg.key.remoteJid, { text: 'Olá, tudo bem? \nPara eu lhe informar valores, me diga:\n\n- Qual data de entrada?\n\n- Qual data de saída?\n\n- Quantas pessoas?' });
                     respondedUsers.add(userJid);
                 }
             }
