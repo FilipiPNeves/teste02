@@ -1,0 +1,12 @@
+{
+  "name": "hctabot",
+  "version": "1.0.0",
+  "description": "Bot WhatsApp usando Baileys para Railway",
+  "main": "hctabot.js",
+  "scripts": {
+    "start": "node hctabot.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {}
+}
