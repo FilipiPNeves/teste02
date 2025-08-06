@@ -9,8 +9,8 @@ async function startBot() {
 
     sock.ev.on('creds.update', saveCreds);
 
-    // Set para guardar os usuários já respondidos
-    const respondedUsers = new Set();
+    // Substituir o Set respondedUsers por um objeto para armazenar timestamps
+    const respondedUsersTimestamps = {};
 
     sock.ev.on('connection.update', (update) => {
         const { connection, lastDisconnect, qr } = update;
@@ -33,14 +33,17 @@ async function startBot() {
             if(!msg.key.fromMe && msg.message) {
                 // Para grupos, use participant; para privado, use remoteJid
                 const userJid = msg.key.participant || msg.key.remoteJid;
-                if (!respondedUsers.has(userJid)) {
-                    await sock.sendMessage(msg.key.remoteJid, { text: 'Olá, tudo bem? \nPara eu lhe informar valores, me diga:\n\n- Qual data de entrada?\n\n- Qual data de saída?\n\n- Quantas pessoas?' });
+                const now = Date.now();
+                const lastResponse = respondedUsersTimestamps[userJid];
+                const threeDaysMs = 3 * 24 * 60 * 60 * 1000;
+                if (!lastResponse || (now - lastResponse) >= threeDaysMs) {
+                    await sock.sendMessage(msg.key.remoteJid, { text: 'Olá, tudo bem? \nPara eu lhe informar valores da casa, me diga:\n\n- Qual data de entrada?\n\n- Qual data de saída?\n\n- Quantas pessoas?' });
                     // Marcar conversa como não lida após responder
                     await sock.chatModify(
                         { markRead: false, lastMessages: [msg] },
                         msg.key.remoteJid
                     );
-                    respondedUsers.add(userJid);
+                    respondedUsersTimestamps[userJid] = now;
                 }
             }
         }
