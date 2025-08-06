@@ -8,5 +8,10 @@
   },
   "author": "",
   "license": "MIT",
-  "dependencies": {}
+  "engines": {
+    "node": ">=16"
+  },
+  "dependencies": {
+    "baileys": "^6.7.0"
+  }
 }
