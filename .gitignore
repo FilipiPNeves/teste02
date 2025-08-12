@@ -1,4 +1,25 @@
-node_modules/
+# Arquivos de autenticação do WhatsApp
 auth_info_baileys/
-.env
+
+# Arquivo de timestamps dos usuários
+user_timestamps.json
+
+# Dependências
+node_modules/
+
+# Logs
 *.log
+npm-debug.log*
+
+# Arquivos temporários
+.DS_Store
+Thumbs.db
+
+# Variáveis de ambiente
+.env
+.env.local
+.env.production
+
+# Arquivos do sistema
+*.tmp
+*.temp
