@@ -1,5 +1,8 @@
-# Use imagem oficial Node.js 20 (compatível com baileys@6.7.18)
+# Usa imagem oficial Node.js 20 (leve e compatível com Baileys)
 FROM node:20-alpine
+
+# Instala git (necessário para dependências que vêm do GitHub)
+RUN apk add --no-cache git
 
 # Diretório de trabalho
 WORKDIR /app
@@ -7,17 +10,17 @@ WORKDIR /app
 # Copia package.json e package-lock.json
 COPY package*.json ./
 
-# Instala dependências
+# Instala dependências (modo produção)
 RUN npm install --production
 
 # Copia o restante do código
 COPY . .
 
-# Garante que a pasta de autenticação exista (será usada como volume externo)
+# Garante que a pasta de autenticação exista
 RUN mkdir -p /app/auth_info_baileys
 
-# Expõe porta (caso precise para healthcheck, não obrigatório para WhatsApp)
+# Expõe porta (opcional, útil para healthcheck do Render)
 EXPOSE 3000
 
-# Comando para rodar o bot
+# Comando para iniciar o bot
 CMD ["npm", "start"]
